@@ -16,18 +16,19 @@ function poemFor(title: string, linecount = 4) {
 }
 
 describe('resolveDailyPoem — deterministic daily selection (SPEC §13)', () => {
-  it('is deterministic: same day + titles → same poem', async () => {
+  it('is deterministic: same day + titles → same poem (not random)', async () => {
     vi.mocked(poetry.fetchTitleExactPoems).mockImplementation(async (t) => [poemFor(t)]);
     const a = await resolveDailyPoem(DAY, TITLES);
     const b = await resolveDailyPoem(DAY, TITLES);
     expect(a).toEqual(b);
-    expect(a.title).toBe(expectedTitle(DAY));
+    expect(a.poem.title).toBe(expectedTitle(DAY));
+    expect(a.random).toBe(false);
   });
 
   it('indexes the SORTED title list by the day hash', async () => {
     vi.mocked(poetry.fetchTitleExactPoems).mockImplementation(async (t) => [poemFor(t)]);
-    const poem = await resolveDailyPoem(DAY, TITLES);
-    expect(poem.title).toBe(expectedTitle(DAY, 0));
+    const result = await resolveDailyPoem(DAY, TITLES);
+    expect(result.poem.title).toBe(expectedTitle(DAY, 0));
   });
 
   it('walks to the next title when the hashed one returns no poems', async () => {
@@ -35,14 +36,15 @@ describe('resolveDailyPoem — deterministic daily selection (SPEC §13)', () =>
     vi.mocked(poetry.fetchTitleExactPoems).mockImplementation(async (t) =>
       t === skip ? [] : [poemFor(t)],
     );
-    const poem = await resolveDailyPoem(DAY, TITLES);
-    expect(poem.title).toBe(expectedTitle(DAY, 1));
+    const result = await resolveDailyPoem(DAY, TITLES);
+    expect(result.poem.title).toBe(expectedTitle(DAY, 1));
   });
 
-  it('falls back to /random when the title list is empty', async () => {
+  it('falls back to /random (flagged random) when the title list is empty', async () => {
     vi.mocked(poetry.fetchRandomPoem).mockResolvedValue([poemFor('A Random Poem', 2)]);
-    const poem = await resolveDailyPoem(DAY, []);
-    expect(poem.title).toBe('A Random Poem');
+    const result = await resolveDailyPoem(DAY, []);
+    expect(result.poem.title).toBe('A Random Poem');
+    expect(result.random).toBe(true);
     expect(poetry.fetchRandomPoem).toHaveBeenCalled();
   });
 

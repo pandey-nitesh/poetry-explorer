@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import type { KeyboardEvent } from 'react';
 import type { SearchField } from '../api/types';
 import styles from './FieldToggle.module.css';
@@ -12,13 +13,21 @@ interface Props {
   onChange: (field: SearchField) => void;
 }
 
-// Segmented control with radiogroup semantics: roving tabindex (only the checked option
-// is tabbable) and arrow-key navigation between the two fields. (SPEC §10, §12)
+// Segmented control with radiogroup semantics: roving tabindex (only the checked option is
+// tabbable) and arrow-key navigation that BOTH selects and moves focus to the newly checked
+// radio — per the radiogroup keyboard contract. (SPEC §10, §12)
 export function FieldToggle({ field, onChange }: Props) {
+  const refs = useRef<Record<SearchField, HTMLButtonElement | null>>({
+    author: null,
+    title: null,
+  });
+
   function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) {
       e.preventDefault();
-      onChange(field === 'author' ? 'title' : 'author');
+      const next: SearchField = field === 'author' ? 'title' : 'author';
+      onChange(next);
+      refs.current[next]?.focus(); // focus follows selection into the radiogroup
     }
   }
 
@@ -29,6 +38,9 @@ export function FieldToggle({ field, onChange }: Props) {
         return (
           <button
             key={f.value}
+            ref={(el) => {
+              refs.current[f.value] = el;
+            }}
             type="button"
             role="radio"
             aria-checked={checked}

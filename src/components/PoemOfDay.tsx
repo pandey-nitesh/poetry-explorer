@@ -10,7 +10,7 @@ const PREVIEW_LINES = 6;
 // The featured poem on Home — a deterministic, day-stable pick (SPEC §13). Degrades
 // quietly: a failure here never blocks the page, it just hides the feature with a retry.
 export function PoemOfDay() {
-  const { poem, isLoading, isError, refetch } = usePoemOfDay();
+  const { poem, isRandom, isLoading, isError, refetch } = usePoemOfDay();
   const [reading, setReading] = useState(false);
 
   if (isLoading) {
@@ -38,10 +38,13 @@ export function PoemOfDay() {
 
   const preview = poem.lines.slice(0, PREVIEW_LINES);
   const truncated = poem.lines.length > PREVIEW_LINES;
+  // Honest label: only the deterministic pick is "Poem of the day". When the title list was
+  // unavailable we fell back to /random, which re-randomizes on refresh. (SPEC §16 #14)
+  const kicker = isRandom ? 'Random poem' : 'Poem of the day';
 
   return (
     <section className={styles.card} aria-labelledby="potd-title">
-      <p className={styles.kicker}>Poem of the day</p>
+      <p className={styles.kicker}>{kicker}</p>
       <h2 id="potd-title" className={styles.title}>
         <Link to={buildPoemPath(poem)} className={styles.titleLink}>
           {poem.title}

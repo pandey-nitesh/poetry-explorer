@@ -1,0 +1,72 @@
+.view {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+.head {
+  margin-bottom: var(--space-5);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.author {
+  margin-top: var(--space-2);
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
+.meta {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.action {
+  min-height: 2.5rem;
+  padding: 0 var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.action:hover {
+  border-color: var(--color-accent);
+}
+
+/*
+ * Poem body: literary serif, comfortable measure & line-height, NEVER justified.
+ * Each line is its own element with pre-wrap so leading spaces survive; blank lines
+ * (empty elements) get a non-breaking space so stanza breaks keep their height. (SPEC §12, §16 #9)
+ */
+.body {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: var(--leading-poem);
+  text-align: left;
+}
+
+.line {
+  white-space: pre-wrap;
+}
+
+.line:empty::before {
+  content: '\00a0';
+}

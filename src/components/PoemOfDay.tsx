@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { buildPoemPath } from '../lib/identity';
 import { usePoemOfDay } from '../hooks/usePoemOfDay';
+import { ReadingMode } from './ReadingMode';
 import styles from './PoemOfDay.module.css';
 
 const PREVIEW_LINES = 6;
@@ -9,6 +11,7 @@ const PREVIEW_LINES = 6;
 // quietly: a failure here never blocks the page, it just hides the feature with a retry.
 export function PoemOfDay() {
   const { poem, isLoading, isError, refetch } = usePoemOfDay();
+  const [reading, setReading] = useState(false);
 
   if (isLoading) {
     return (
@@ -55,9 +58,16 @@ export function PoemOfDay() {
         {truncated && <div className={styles.ellipsis}>…</div>}
       </div>
 
-      <Link to={buildPoemPath(poem)} className={styles.readLink}>
-        Read the poem →
-      </Link>
+      <div className={styles.actions}>
+        <Link to={buildPoemPath(poem)} className={styles.readLink}>
+          Read the poem →
+        </Link>
+        <button type="button" className={styles.readingBtn} onClick={() => setReading(true)}>
+          Reading mode
+        </button>
+      </div>
+
+      {reading && <ReadingMode poem={poem} onClose={() => setReading(false)} />}
     </section>
   );
 }

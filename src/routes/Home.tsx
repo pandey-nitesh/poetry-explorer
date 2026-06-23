@@ -1,6 +1,7 @@
 import { PoemOfDay } from '../components/PoemOfDay';
 import { PoetChips } from '../components/PoetChips';
 import { SearchBar } from '../components/SearchBar';
+import { SurpriseButton } from '../components/SurpriseButton';
 import styles from './Home.module.css';
 
 export function Home() {
@@ -14,6 +15,9 @@ export function Home() {
         </p>
       </header>
       <SearchBar />
+      <div className={styles.surprise}>
+        <SurpriseButton />
+      </div>
       <PoetChips />
       <PoemOfDay />
     </main>

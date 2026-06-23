@@ -2,7 +2,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { PoemView } from '../components/PoemView';
 import { EmptyState } from '../components/states/EmptyState';
 import { ErrorState } from '../components/states/ErrorState';
-import { Skeleton } from '../components/states/Skeleton';
+import { PoemSkeleton } from '../components/states/PoemSkeleton';
 import { usePoem } from '../hooks/usePoem';
 import { parsePoemParams } from '../lib/identity';
 import styles from './PoemDetail.module.css';
@@ -27,7 +27,7 @@ export function PoemDetail() {
       />
     );
   } else if (isLoading) {
-    body = <Skeleton rows={3} />;
+    body = <PoemSkeleton />;
   } else if (isError) {
     body = <ErrorState onRetry={refetch} />;
   } else if (notFound || !poem) {

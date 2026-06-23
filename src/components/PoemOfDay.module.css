@@ -134,35 +134,41 @@
   color: var(--accent);
 }
 
-.skeletonTitle,
-.skeletonLine {
+/* Loading skeleton — mirrors the loaded daily folio (title, author, ~6 preview lines,
+   actions). Colour/animation come from the shared global .shimmer. */
+.skTitle {
+  height: 1.8rem;
+  width: 60%;
+  margin-top: var(--space-2);
+  border-radius: var(--radius-slip);
+}
+
+.skAuthor {
   height: 1rem;
+  width: 32%;
   margin-top: var(--space-3);
   border-radius: var(--radius-slip);
-  background: linear-gradient(
-    90deg,
-    var(--color-skeleton) 0%,
-    var(--color-skeleton-sheen) 50%,
-    var(--color-skeleton) 100%
-  );
-  background-size: 200% 100%;
-  animation: potdShimmer 1.3s ease-in-out infinite;
 }
 
-.skeletonTitle {
-  width: 60%;
-  height: 1.6rem;
+.skPreview {
+  display: flex;
+  flex-direction: column;
+  gap: calc((var(--leading-poem) - 1) * 0.9rem);
+  margin: var(--space-4) 0;
 }
 
-.skeletonLine {
-  width: 90%;
+.skLine {
+  height: 1rem;
+  border-radius: var(--radius-slip);
 }
 
-@keyframes potdShimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+.skActions {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.skAction {
+  height: 1.5rem;
+  width: 7rem;
+  border-radius: var(--radius-slip);
 }

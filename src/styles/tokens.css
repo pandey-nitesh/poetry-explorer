@@ -1,33 +1,52 @@
 /*
- * Design tokens — colors, type scale, spacing, radii.
- * Light is the :root default; dark applies when the user picks it (data-theme="dark")
- * or when the OS prefers dark and the user hasn't explicitly chosen light. (SPEC §12)
+ * Stanza design tokens (DESIGN.md). Two complete skins:
+ *   Folio    — light, aged-ivory paper / walnut ink / oxblood rubric
+ *   Nocturne — dark, ink-violet / moon paper / illuminated oxblood
+ *
+ * Folio is the :root default; Nocturne applies on explicit choice (data-theme="dark")
+ * or OS preference when the reader hasn't chosen light. The accent is rubrication —
+ * small and specific; never fill large surfaces with it.
+ *
+ * Existing components reference the legacy --color-* / --font-* / --shadow-* names; those
+ * are kept as ALIASES of the Stanza tokens, so the whole app adopts the skin here while
+ * later PRs restructure into slips and the folio rail.
  */
 
 :root {
-  /* Type families: literary serif for poem bodies, clean sans for UI chrome. */
-  --font-serif: 'Lora', 'EB Garamond', Georgia, 'Times New Roman', serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, system-ui, sans-serif;
+  color-scheme: light;
 
-  /* User-controlled multiplier (SPEC §8 fontScale); applied to root font-size. */
-  --font-scale: 1;
+  /* Type roles */
+  --font-display: 'Literata', Georgia, 'Times New Roman', serif;
+  --font-poem: 'Literata', Georgia, 'Times New Roman', serif;
+  --font-body: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Roboto Mono', 'SFMono-Regular', monospace;
 
-  /* Type scale (rem) */
-  --text-xs: 0.78rem;
+  /* Folio palette */
+  --bg: oklch(96% 0.018 92); /* aged ivory */
+  --bg2: oklch(91% 0.021 92); /* deckle paper (raised slips) */
+  --ink: oklch(20% 0.018 72); /* walnut ink */
+  --muted: oklch(38% 0.018 78); /* dark olive ink */
+  --rule: oklch(77% 0.018 88); /* tea-stained hairline */
+  --accent: oklch(40% 0.15 27); /* oxblood rubric */
+  --focus: oklch(43% 0.17 27); /* clear oxblood ring */
+  --accent-weak: oklch(40% 0.15 27 / 0.09); /* faint wash for selected paper shift */
+
+  /* Fluid type scale — type breathes from phone to desktop (clamp). */
+  --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
-  --text-lg: 1.18rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 2rem;
-  --text-3xl: 2.6rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.3rem, 1.15rem + 0.6vw, 1.5rem);
+  --text-2xl: clamp(1.6rem, 1.3rem + 1.2vw, 2rem);
+  --text-3xl: clamp(2rem, 1.45rem + 2.4vw, 2.8rem);
 
-  --leading-tight: 1.2;
+  --leading-tight: 1.18;
   --leading-normal: 1.5;
   --leading-poem: 1.7;
 
-  /* Comfortable reading measure for poem/body text (SPEC §12). */
-  --measure: 38rem;
+  /* Reading measure (~60–70ch); poem text is never justified. */
+  --measure: 62ch;
 
   /* Spacing scale */
   --space-1: 0.25rem;
@@ -39,62 +58,58 @@
   --space-8: 3rem;
   --space-12: 5rem;
 
-  /* Radii & elevation */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 2px rgba(31, 27, 22, 0.06);
-  --shadow-md: 0 4px 16px rgba(31, 27, 22, 0.1);
+  /* Radii — 2px slips, pill controls. */
+  --radius-slip: 2px;
+  --radius-control: 999px;
 
-  /* Light palette — warm paper */
-  --color-bg: #faf8f3;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f3efe6;
-  --color-text: #1f1b16;
-  --color-text-muted: #6b6157;
-  --color-border: #e6e0d6;
-  --color-accent: #7a4a2e;
-  --color-accent-hover: #5f3920;
-  --color-accent-contrast: #ffffff;
-  --color-danger: #9a342a;
-  --color-focus: #7a4a2e;
-  --color-skeleton: #ece7dd;
-  --color-skeleton-sheen: #f6f2ea;
+  /* --- Legacy aliases (existing components resolve through these) --- */
+  --color-bg: var(--bg);
+  --color-surface: var(--bg2);
+  --color-surface-alt: var(--bg2);
+  --color-text: var(--ink);
+  --color-text-muted: var(--muted);
+  --color-border: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent);
+  --color-accent-contrast: var(--bg);
+  --color-danger: var(--accent);
+  --color-focus: var(--focus);
+  --color-skeleton: var(--bg2);
+  --color-skeleton-sheen: var(--rule);
+  --font-serif: var(--font-poem);
+  --font-sans: var(--font-body);
+
+  /* Stanza is assembled from paper, not floating glass — no shadows. */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --radius-sm: var(--radius-slip);
+  --radius-md: var(--radius-slip);
+  --radius-lg: var(--radius-slip);
 }
 
-/* Dark overrides — reused by explicit choice and by OS preference. */
+/* Nocturne — only the base color tokens change; aliases inherit via var(). */
 :root[data-theme='dark'] {
-  --color-bg: #16130f;
-  --color-surface: #211c16;
-  --color-surface-alt: #2a241c;
-  --color-text: #ece5d8;
-  --color-text-muted: #a89a86;
-  --color-border: #332c22;
-  --color-accent: #d8a26a;
-  --color-accent-hover: #e8b884;
-  --color-accent-contrast: #1a1610;
-  --color-danger: #e08b7e;
-  --color-focus: #d8a26a;
-  --color-skeleton: #2a241c;
-  --color-skeleton-sheen: #352e24;
   color-scheme: dark;
+  --bg: oklch(15% 0.018 292);
+  --bg2: oklch(20% 0.017 292);
+  --ink: oklch(92% 0.01 86);
+  --muted: oklch(72% 0.014 286);
+  --rule: oklch(34% 0.018 292);
+  --accent: oklch(72% 0.115 27);
+  --focus: oklch(78% 0.125 27);
+  --accent-weak: oklch(72% 0.115 27 / 0.16);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --color-bg: #16130f;
-    --color-surface: #211c16;
-    --color-surface-alt: #2a241c;
-    --color-text: #ece5d8;
-    --color-text-muted: #a89a86;
-    --color-border: #332c22;
-    --color-accent: #d8a26a;
-    --color-accent-hover: #e8b884;
-    --color-accent-contrast: #1a1610;
-    --color-danger: #e08b7e;
-    --color-focus: #d8a26a;
-    --color-skeleton: #2a241c;
-    --color-skeleton-sheen: #352e24;
     color-scheme: dark;
+    --bg: oklch(15% 0.018 292);
+    --bg2: oklch(20% 0.017 292);
+    --ink: oklch(92% 0.01 86);
+    --muted: oklch(72% 0.014 286);
+    --rule: oklch(34% 0.018 292);
+    --accent: oklch(72% 0.115 27);
+    --focus: oklch(78% 0.125 27);
+    --accent-weak: oklch(72% 0.115 27 / 0.16);
   }
 }

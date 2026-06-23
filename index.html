@@ -5,17 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f6f2e5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0a12" media="(prefers-color-scheme: dark)" />
     <meta
       name="description"
       content="Search and read classic public-domain poetry from PoetryDB."
     />
-    <!-- Literary serif for poem bodies & display headings; degrades to Georgia. (SPEC §12) -->
+    <!--
+      Stanza type: Literata (display + poem serif), Atkinson Hyperlegible (UI/body),
+      system mono for folio numbers. Each role falls back to system fonts if blocked,
+      so layout never breaks. (DESIGN — Typography)
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..600;1,400..600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Literata:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
       rel="stylesheet"
     />
     <title>Poetry Explorer</title>

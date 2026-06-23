@@ -1,8 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Header } from './components/Header';
 import { useLists } from './hooks/useLists';
 import { Home } from './routes/Home';
 import { NotFound } from './routes/NotFound';
+import { SearchResults } from './routes/SearchResults';
 
 // PoetryDB data is immutable, so cache forever and never auto-retry: a host-overload
 // error just fails again on retry; transient failures are retried via the error UI. (SPEC §5)
@@ -21,10 +23,14 @@ const queryClient = new QueryClient({
 function AppRoutes() {
   useLists();
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 

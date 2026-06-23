@@ -32,3 +32,7 @@
   font-size: var(--text-lg);
   color: var(--color-text-muted);
 }
+
+.surprise {
+  margin-top: var(--space-3);
+}

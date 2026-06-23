@@ -1,0 +1,100 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  overflow-y: auto;
+  padding: var(--space-8) var(--space-4) var(--space-12);
+}
+
+/* Small floating control rail — persistently visible, touch-sized, never hover-only. */
+.rail {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.group {
+  display: inline-flex;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  overflow: hidden;
+  background: var(--bg2);
+}
+
+.ctrl {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.ctrl + .ctrl {
+  border-left: 1px solid var(--rule);
+}
+
+.ctrl:hover:not(:disabled) {
+  color: var(--accent);
+}
+
+.ctrl:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.close {
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+
+.close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* The poem alone — single column, generous margins, no panel. */
+.reader {
+  max-width: var(--measure);
+  margin: var(--space-8) auto 0;
+  font-family: var(--font-poem);
+  color: var(--color-text);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.author {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-6);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.8em;
+  color: var(--color-text-muted);
+}
+
+.line {
+  white-space: pre-wrap;
+}
+
+.line:empty::before {
+  content: '\00a0';
+}

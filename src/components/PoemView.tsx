@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import type { Poem } from '../api/types';
 import { buildPoemPath } from '../lib/identity';
+import { ReadingMode } from './ReadingMode';
 import { SaveButton } from './SaveButton';
+import { SurpriseButton } from './SurpriseButton';
 import styles from './PoemView.module.css';
 
 interface Props {
@@ -24,6 +26,7 @@ async function copyToClipboard(text: string): Promise<void> {
 // blank-line stanza breaks (via :empty::before) are preserved, never trimmed. (SPEC §10, §12, §16 #9)
 export function PoemView({ poem }: Props) {
   const [flash, setFlash] = useState<Flash>(null);
+  const [reading, setReading] = useState(false);
 
   function showFlash(which: Exclude<Flash, null>) {
     setFlash(which);
@@ -69,6 +72,10 @@ export function PoemView({ poem }: Props) {
         <button type="button" className={styles.action} onClick={shareLink}>
           {flash === 'link' ? 'Copied' : 'Share link'}
         </button>
+        <button type="button" className={styles.action} onClick={() => setReading(true)}>
+          Reading mode
+        </button>
+        <SurpriseButton className={styles.action} />
       </div>
 
       <div className={styles.body}>
@@ -78,6 +85,8 @@ export function PoemView({ poem }: Props) {
           </div>
         ))}
       </div>
+
+      {reading && <ReadingMode poem={poem} onClose={() => setReading(false)} />}
     </article>
   );
 }

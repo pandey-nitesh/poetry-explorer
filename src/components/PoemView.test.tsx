@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { Poem } from '../api/types';
 import { useAppStore } from '../store/useAppStore';
+import { renderWithProviders } from '../test/utils';
 import { PoemView } from './PoemView';
 
 beforeEach(() => {
@@ -20,11 +20,8 @@ const POEM: Poem = {
 };
 
 function renderView(poem: Poem = POEM) {
-  return render(
-    <MemoryRouter>
-      <PoemView poem={poem} />
-    </MemoryRouter>,
-  );
+  // QueryClient is needed because PoemView hosts the Surprise me control.
+  return renderWithProviders(<PoemView poem={poem} />);
 }
 
 describe('PoemView (SPEC §10, §12)', () => {
@@ -64,5 +61,14 @@ describe('PoemView (SPEC §10, §12)', () => {
     renderView();
     await userEvent.click(screen.getByRole('button', { name: /copy poem/i }));
     expect(await screen.findByRole('button', { name: /copied/i })).toBeInTheDocument();
+  });
+
+  it('opens and closes reading mode', async () => {
+    renderView();
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: /reading mode/i }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: /close reading mode/i }));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 });

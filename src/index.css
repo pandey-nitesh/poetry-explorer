@@ -55,6 +55,38 @@ h3 {
   font-weight: 600;
 }
 
+/* Long, unbroken titles must never force horizontal scroll (e.g. at 200% zoom). */
+h1,
+h2,
+h3,
+p,
+a {
+  overflow-wrap: break-word;
+}
+
+/* Programmatic focus on the main region (route change) shouldn't show an outline. */
+#main:focus {
+  outline: none;
+}
+
+/* Skip link — visually hidden until focused, then pinned top-left. (SPEC §12) */
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -3rem;
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
 :focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;

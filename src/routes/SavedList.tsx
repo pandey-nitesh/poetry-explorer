@@ -11,7 +11,7 @@ export function SavedList() {
   const saved = useAppStore((s) => s.saved);
 
   return (
-    <main className={styles.page}>
+    <main id="main" tabIndex={-1} className={styles.page}>
       <h1 className={styles.heading}>Reading list</h1>
       {saved.length === 0 ? (
         <EmptyState

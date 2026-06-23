@@ -77,4 +77,15 @@ describe('SearchResults (SPEC §10, §11)', () => {
     await userEvent.click(screen.getByRole('button', { name: /next/i }));
     expect(await screen.findByText(/Page 2 of 2/)).toBeInTheDocument();
   });
+
+  it('hints to narrow the search on a large result set (SPEC §11)', async () => {
+    const many = Array.from({ length: 70 }, (_, i) => ({
+      author: 'A',
+      title: `Poem ${i}`,
+      linecount: i + 1,
+    }));
+    vi.mocked(poetry.searchTitlesContaining).mockResolvedValue(many);
+    renderWithProviders(<SearchResults />, { route: '/search?titleContains=poem' });
+    expect(await screen.findByText(/keep typing to narrow/i)).toBeInTheDocument();
+  });
 });

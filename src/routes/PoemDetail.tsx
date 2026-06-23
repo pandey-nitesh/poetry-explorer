@@ -43,5 +43,9 @@ export function PoemDetail() {
     body = <PoemView poem={poem} />;
   }
 
-  return <main className={styles.page}>{body}</main>;
+  return (
+    <main id="main" tabIndex={-1} className={styles.page}>
+      {body}
+    </main>
+  );
 }

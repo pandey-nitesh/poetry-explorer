@@ -19,13 +19,34 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
   color: var(--color-text);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+/*
+ * On theme switch, colour/border values transition briefly while content stays visible
+ * (no fade-from-transparent). :where() keeps specificity at 0 so component transitions
+ * (e.g. snappy hovers) always win; disabled under reduced-motion below. (DESIGN — Motion)
+ */
+@media (prefers-reduced-motion: no-preference) {
+  :where(*) {
+    transition:
+      background-color 0.45s ease,
+      border-color 0.45s ease,
+      color 0.45s ease,
+      fill 0.45s ease;
+  }
 }
 
 img,

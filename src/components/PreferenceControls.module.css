@@ -1,0 +1,51 @@
+.controls {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sizeGroup {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.sizeBtn {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: none;
+  cursor: pointer;
+}
+
+.sizeBtn + .sizeBtn {
+  border-left: 1px solid var(--color-border);
+}
+
+.sizeBtn:hover:not(:disabled) {
+  background: var(--color-surface-alt);
+}
+
+.sizeBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.themeBtn {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.themeBtn:hover {
+  background: var(--color-surface-alt);
+}

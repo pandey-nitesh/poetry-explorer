@@ -1,0 +1,100 @@
+/*
+ * Design tokens — colors, type scale, spacing, radii.
+ * Light is the :root default; dark applies when the user picks it (data-theme="dark")
+ * or when the OS prefers dark and the user hasn't explicitly chosen light. (SPEC §12)
+ */
+
+:root {
+  /* Type families: literary serif for poem bodies, clean sans for UI chrome. */
+  --font-serif: 'Lora', 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, system-ui, sans-serif;
+
+  /* User-controlled multiplier (SPEC §8 fontScale); applied to root font-size. */
+  --font-scale: 1;
+
+  /* Type scale (rem) */
+  --text-xs: 0.78rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.18rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.6rem;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-poem: 1.7;
+
+  /* Comfortable reading measure for poem/body text (SPEC §12). */
+  --measure: 38rem;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-12: 5rem;
+
+  /* Radii & elevation */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(31, 27, 22, 0.06);
+  --shadow-md: 0 4px 16px rgba(31, 27, 22, 0.1);
+
+  /* Light palette — warm paper */
+  --color-bg: #faf8f3;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f3efe6;
+  --color-text: #1f1b16;
+  --color-text-muted: #6b6157;
+  --color-border: #e6e0d6;
+  --color-accent: #7a4a2e;
+  --color-accent-hover: #5f3920;
+  --color-accent-contrast: #ffffff;
+  --color-danger: #9a342a;
+  --color-focus: #7a4a2e;
+  --color-skeleton: #ece7dd;
+  --color-skeleton-sheen: #f6f2ea;
+}
+
+/* Dark overrides — reused by explicit choice and by OS preference. */
+:root[data-theme='dark'] {
+  --color-bg: #16130f;
+  --color-surface: #211c16;
+  --color-surface-alt: #2a241c;
+  --color-text: #ece5d8;
+  --color-text-muted: #a89a86;
+  --color-border: #332c22;
+  --color-accent: #d8a26a;
+  --color-accent-hover: #e8b884;
+  --color-accent-contrast: #1a1610;
+  --color-danger: #e08b7e;
+  --color-focus: #d8a26a;
+  --color-skeleton: #2a241c;
+  --color-skeleton-sheen: #352e24;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: #16130f;
+    --color-surface: #211c16;
+    --color-surface-alt: #2a241c;
+    --color-text: #ece5d8;
+    --color-text-muted: #a89a86;
+    --color-border: #332c22;
+    --color-accent: #d8a26a;
+    --color-accent-hover: #e8b884;
+    --color-accent-contrast: #1a1610;
+    --color-danger: #e08b7e;
+    --color-focus: #d8a26a;
+    --color-skeleton: #2a241c;
+    --color-skeleton-sheen: #352e24;
+    color-scheme: dark;
+  }
+}

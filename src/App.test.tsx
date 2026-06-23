@@ -7,7 +7,13 @@ beforeEach(() => {
   vi.stubGlobal(
     'fetch',
     vi.fn((url: unknown) => {
-      const body = String(url).includes('/author') ? { authors: [] } : { titles: [] };
+      const u = String(url);
+      let body: unknown;
+      if (u.endsWith('/author')) body = { authors: [] };
+      else if (u.endsWith('/title')) body = { titles: [] };
+      else if (u.endsWith('/random'))
+        body = [{ author: 'X', title: 'Daily', linecount: 1, lines: ['a line'] }];
+      else body = []; // searches / title-exact
       return Promise.resolve({
         ok: true,
         status: 200,

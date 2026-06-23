@@ -1,3 +1,4 @@
+import { PoemOfDay } from '../components/PoemOfDay';
 import { SearchBar } from '../components/SearchBar';
 import styles from './Home.module.css';
 
@@ -9,6 +10,7 @@ export function Home() {
         <p className={styles.tagline}>Search and read classic public-domain poetry.</p>
       </header>
       <SearchBar />
+      <PoemOfDay />
     </main>
   );
 }

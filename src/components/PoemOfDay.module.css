@@ -1,0 +1,118 @@
+.card {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.kicker {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  line-height: 1.15;
+}
+
+.titleLink {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.titleLink:hover {
+  color: var(--color-accent);
+}
+
+.author {
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.preview {
+  margin: var(--space-4) 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: var(--leading-poem);
+  color: var(--color-text);
+}
+
+.line {
+  white-space: pre-wrap;
+}
+
+.line:empty::before {
+  content: '\00a0';
+}
+
+.ellipsis {
+  color: var(--color-text-muted);
+}
+
+.readLink {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.readLink:hover {
+  text-decoration: underline;
+}
+
+.muted {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.retry {
+  min-height: 2.5rem;
+  padding: 0 var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.skeletonTitle,
+.skeletonLine {
+  height: 1rem;
+  margin-top: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton) 0%,
+    var(--color-skeleton-sheen) 50%,
+    var(--color-skeleton) 100%
+  );
+  background-size: 200% 100%;
+  animation: potdShimmer 1.3s ease-in-out infinite;
+}
+
+.skeletonTitle {
+  width: 60%;
+  height: 1.6rem;
+}
+
+.skeletonLine {
+  width: 90%;
+}
+
+@keyframes potdShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

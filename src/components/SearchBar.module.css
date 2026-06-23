@@ -1,0 +1,78 @@
+.wrap {
+  width: 100%;
+}
+
+.bar {
+  display: flex;
+  gap: var(--space-2);
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.inputWrap {
+  position: relative;
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  min-height: 2.75rem; /* ~44px touch target (SPEC §12) */
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.submit {
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-accent-contrast);
+  background: var(--color-accent);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status {
+  min-height: 1.5rem;
+  margin-top: var(--space-2);
+}
+
+.hint {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.crossHint {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  background: none;
+  border: none;
+  padding: var(--space-1) 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.crossHint:hover {
+  text-decoration: underline;
+}

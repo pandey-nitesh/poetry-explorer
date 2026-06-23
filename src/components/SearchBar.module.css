@@ -68,11 +68,6 @@
   margin-top: var(--space-3);
 }
 
-.hint {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-}
-
 .crossHint {
   font-size: var(--text-sm);
   color: var(--color-accent);

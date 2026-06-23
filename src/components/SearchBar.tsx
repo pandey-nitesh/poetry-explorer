@@ -24,7 +24,7 @@ export function SearchBar() {
   const setField = useAppStore((s) => s.setField);
   const setQuery = useAppStore((s) => s.setQuery);
 
-  const { authors, titles, isLoading } = useLists();
+  const { authors, titles } = useLists();
   const activeList = field === 'author' ? authors : titles;
   const otherList = field === 'author' ? titles : authors;
   const suggestions = useAutocomplete(query, activeList);
@@ -160,8 +160,7 @@ export function SearchBar() {
       </form>
 
       <div className={styles.status} aria-live="polite">
-        {isLoading && <span className={styles.hint}>Loading the poem catalog…</span>}
-        {!isLoading && showCrossFieldHint && (
+        {showCrossFieldHint && (
           <button type="button" className={styles.crossHint} onClick={takeCrossFieldHint}>
             No {FIELD_LABEL[field]}s match “{trimmed}”. Search {FIELD_LABEL[otherField]}s
             instead?

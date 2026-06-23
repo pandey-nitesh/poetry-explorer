@@ -10,7 +10,6 @@ import styles from './ResultsList.module.css';
 
 const POEMS_PER_PAGE = 24;
 const AUTHORS_PER_PAGE = 8;
-const LARGE_RESULT_SET = 60;
 
 interface Props {
   request: SearchRequest;
@@ -51,13 +50,6 @@ export function ResultsList({ request, results, page, onPage }: Props) {
 
   return (
     <div className={styles.results}>
-      <p className={styles.summary} aria-live="polite">
-        {results.length} {results.length === 1 ? 'poem' : 'poems'} {describe(request)}
-        {results.length > LARGE_RESULT_SET && (
-          <span className={styles.hint}> — keep typing to narrow your search.</span>
-        )}
-      </p>
-
       {grouped ? (
         <div className={styles.groups}>
           {authorGroups.slice(start, start + pageSize).map((g) => (
@@ -77,15 +69,4 @@ export function ResultsList({ request, results, page, onPage }: Props) {
       <Pagination page={safePage} pageCount={pageCount} onPage={onPage} />
     </div>
   );
-}
-
-function describe(request: SearchRequest): string {
-  switch (request.kind) {
-    case 'authorContains':
-      return `by authors matching “${request.term}”`;
-    case 'titleContains':
-      return `with titles containing “${request.term}”`;
-    case 'title':
-      return `titled “${request.term}”`;
-  }
 }

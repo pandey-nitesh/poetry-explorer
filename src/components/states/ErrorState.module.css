@@ -1,15 +1,16 @@
 .error {
   text-align: center;
   padding: var(--space-12) var(--space-4);
-  max-width: 32rem;
+  max-width: 34rem;
   margin: 0 auto;
 }
 
+/* Composed, not alarming: the title stays ink — accent is reserved for the retry. */
 .title {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: var(--text-xl);
   margin-bottom: var(--space-2);
-  color: var(--color-danger);
+  color: var(--color-text);
 }
 
 .message {
@@ -17,18 +18,20 @@
   margin-bottom: var(--space-5);
 }
 
+/* The one accent affordance in this state — low-fill, not poured. */
 .retry {
   min-height: 2.75rem;
-  padding: 0 var(--space-6);
+  padding: 0 var(--space-5);
   font-size: var(--text-base);
   font-weight: 600;
-  color: var(--color-accent-contrast);
-  background: var(--color-accent);
-  border: none;
-  border-radius: var(--radius-md);
+  color: var(--color-accent);
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-control);
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
 .retry:hover {
-  background: var(--color-accent-hover);
+  background: var(--accent-weak);
 }

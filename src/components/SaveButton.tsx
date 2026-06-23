@@ -6,7 +6,8 @@ interface Props {
   poem: PoemMeta;
 }
 
-// Toggles a poem in/out of the persisted reading list. (SPEC §8, §10)
+// A small geometric bookmark that fills when saved — a reader's mark, not a gamified
+// badge. (DESIGN — Components / Save control). aria-pressed carries the state for SRs.
 export function SaveButton({ poem }: Props) {
   const saved = useAppStore((s) => s.isSaved(poem));
   const toggleSaved = useAppStore((s) => s.toggleSaved);
@@ -14,11 +15,27 @@ export function SaveButton({ poem }: Props) {
   return (
     <button
       type="button"
-      className={saved ? `${styles.btn} ${styles.saved}` : styles.btn}
+      className={styles.btn}
       aria-pressed={saved}
       onClick={() => toggleSaved(poem)}
     >
-      {saved ? '★ Saved' : '☆ Save'}
+      <svg
+        className={styles.mark}
+        viewBox="0 0 12 16"
+        width="12"
+        height="16"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          d="M1 1.2h10v13.6l-5-4-5 4z"
+          fill={saved ? 'currentColor' : 'none'}
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinejoin="round"
+        />
+      </svg>
+      {saved ? 'Saved' : 'Save'}
     </button>
   );
 }

@@ -1,15 +1,20 @@
 import { PoemOfDay } from '../components/PoemOfDay';
+import { PoetChips } from '../components/PoetChips';
 import { SearchBar } from '../components/SearchBar';
 import styles from './Home.module.css';
 
 export function Home() {
   return (
     <main id="main" tabIndex={-1} className={styles.home}>
-      <header className={styles.hero}>
+      <header className={styles.masthead}>
+        <p className={styles.folioMark}>PoetryDB · public-domain index</p>
         <h1 className={styles.title}>Poetry Explorer</h1>
-        <p className={styles.tagline}>Search and read classic public-domain poetry.</p>
+        <p className={styles.invitation}>
+          Search the index by author or title, then sit and read.
+        </p>
       </header>
       <SearchBar />
+      <PoetChips />
       <PoemOfDay />
     </main>
   );

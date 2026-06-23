@@ -22,6 +22,18 @@ export function buildSearchPath(
   return `/search?${new URLSearchParams({ [kind]: term }).toString()}`;
 }
 
+// Human-readable description of a search, for the folio rail / results metadata.
+export function describeSearch(request: SearchRequest): string {
+  switch (request.kind) {
+    case 'authorContains':
+      return `by authors matching “${request.term}”`;
+    case 'titleContains':
+      return `with titles containing “${request.term}”`;
+    case 'title':
+      return `titled “${request.term}”`;
+  }
+}
+
 // Read the active search off URL params. Returns null when no recognized, non-blank
 // param is present. Precedence is fixed and deterministic.
 export function parseSearchParams(params: URLSearchParams): SearchRequest | null {

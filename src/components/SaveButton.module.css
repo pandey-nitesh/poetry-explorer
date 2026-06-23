@@ -1,25 +1,31 @@
 .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   min-height: 2.5rem;
-  padding: 0 var(--space-4);
+  padding: 0 var(--space-3);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-accent-contrast);
-  background: var(--color-accent);
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
   cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .btn:hover {
-  background: var(--color-accent-hover);
+  border-color: var(--accent);
 }
 
-.saved {
-  color: var(--color-accent);
-  background: transparent;
-  border-color: var(--color-accent);
+/* Saved: the mark fills and the control takes the oxblood rubric. */
+.btn[aria-pressed='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
-.saved:hover {
-  background: var(--color-surface-alt);
+.mark {
+  display: block;
 }

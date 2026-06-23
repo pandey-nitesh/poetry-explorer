@@ -16,6 +16,7 @@ export function PreferenceControls() {
   const setFontScale = useAppStore((s) => s.setFontScale);
 
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
+  const nextThemeName = nextTheme === 'dark' ? 'Nocturne' : 'Folio';
 
   return (
     <div className={styles.controls}>
@@ -44,7 +45,8 @@ export function PreferenceControls() {
         className={styles.themeBtn}
         onClick={() => setTheme(nextTheme)}
         aria-pressed={theme === 'dark'}
-        aria-label={`Switch to ${nextTheme} theme`}
+        aria-label={`Switch to ${nextThemeName} (${nextTheme}) theme`}
+        title={`Switch to ${nextThemeName} theme`}
       >
         {theme === 'dark' ? '☀' : '☾'}
       </button>

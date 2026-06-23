@@ -1,3 +1,4 @@
+/* A compact index drawer beneath the input. (DESIGN — Search field) */
 .listbox {
   position: absolute;
   z-index: 20;
@@ -9,15 +10,16 @@
   list-style: none;
   max-height: 18rem;
   overflow-y: auto;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-slip);
 }
 
 .option {
+  position: relative;
   padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm);
+  padding-left: calc(var(--space-3) + 3px);
+  border-radius: var(--radius-slip);
   cursor: pointer;
   color: var(--color-text);
   white-space: nowrap;
@@ -29,11 +31,18 @@
   background: var(--color-surface-alt);
 }
 
+/* Highlighted option: a left accent rule + faint paper shift — not a full accent fill. */
 .active {
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
+  background: var(--accent-weak);
 }
 
-.active:hover {
-  background: var(--color-accent);
+.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
 }

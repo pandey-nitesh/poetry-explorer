@@ -15,37 +15,47 @@
   min-width: 0;
 }
 
+/* One prominent input, set like an index-drawer label; pill control radius. */
 .input {
   width: 100%;
   height: 100%;
-  min-height: 2.75rem; /* ~44px touch target (SPEC §12) */
-  padding: var(--space-2) var(--space-3);
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-4);
   font-size: var(--text-lg);
+  font-family: var(--font-body);
   color: var(--color-text);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+}
+
+.input:focus-visible {
+  border-color: var(--focus);
 }
 
 .input::placeholder {
   color: var(--color-text-muted);
 }
 
+/* Low-fill button — primary verb, but the accent is never poured into it. */
 .submit {
   min-height: 2.75rem;
   padding: 0 var(--space-5);
   font-size: var(--text-base);
   font-weight: 600;
-  color: var(--color-accent-contrast);
-  background: var(--color-accent);
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .submit:hover:not(:disabled) {
-  background: var(--color-accent-hover);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .submit:disabled {
@@ -55,7 +65,7 @@
 
 .status {
   min-height: 1.5rem;
-  margin-top: var(--space-2);
+  margin-top: var(--space-3);
 }
 
 .hint {

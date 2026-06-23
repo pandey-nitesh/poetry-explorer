@@ -8,9 +8,11 @@ interface Props {
   showAuthor?: boolean;
 }
 
-// The whole card links to the detail page. buildPoemPath appends &n=<linecount> when known,
-// which is what makes duplicate-title disambiguation work in usePoem. Line count is shown
-// only when > 0 (0 means unknown). (SPEC §10, §12, §16 #15/#18)
+// A bibliographic slip (DESIGN — Results): title in display type, author beneath,
+// line-count tag in mono, anchored by a left hairline rule that warms to oxblood on
+// hover/focus. The whole slip is the link target. buildPoemPath writes &n when line
+// count is known, which is what makes duplicate-title disambiguation work in usePoem.
+// Line count shows only when > 0 (0 = unknown). (SPEC §10, §16 #15/#18)
 export function PoemCard({ poem, showAuthor = true }: Props) {
   const lineLabel =
     poem.linecount > 0
@@ -19,7 +21,7 @@ export function PoemCard({ poem, showAuthor = true }: Props) {
   return (
     <Link
       to={buildPoemPath(poem)}
-      className={styles.card}
+      className={styles.slip}
       aria-label={`${poem.title} by ${poem.author}${lineLabel}`}
     >
       <span className={styles.title}>{poem.title}</span>

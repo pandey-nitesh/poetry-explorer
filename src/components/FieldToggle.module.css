@@ -1,25 +1,29 @@
 .toggle {
   display: inline-flex;
-  padding: 3px;
-  background: var(--color-surface-alt);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  align-items: stretch;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  overflow: hidden;
 }
 
+/* Low-fill segments; the active one is marked by stronger ink + an accent tick,
+   not a big filled pill. (DESIGN — Search field / toggle) */
 .option {
   appearance: none;
-  min-height: 2.25rem;
+  position: relative;
+  min-height: 2.75rem;
   padding: 0 var(--space-4);
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text-muted);
   background: transparent;
   border: none;
-  border-radius: calc(var(--radius-md) - 3px);
   cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
+  transition: color 0.15s ease;
+}
+
+.option + .option {
+  border-left: 1px solid var(--rule);
 }
 
 .option:hover {
@@ -28,6 +32,16 @@
 
 .checked {
   color: var(--color-text);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-sm);
+}
+
+/* The one mark of colour: a small oxblood tick under the active segment. */
+.checked::after {
+  content: '';
+  position: absolute;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: 6px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
 }

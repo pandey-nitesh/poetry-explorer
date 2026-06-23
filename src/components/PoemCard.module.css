@@ -1,29 +1,49 @@
-.card {
+.slip {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+  position: relative;
   padding: var(--space-3) var(--space-4);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  padding-left: calc(var(--space-4) + 4px);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-slip);
   color: var(--color-text);
   text-decoration: none;
-  min-height: 2.75rem;
+  /* Transform-only hover so it's cheap and reduced-motion-safe. */
   transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    transform 0.15s ease;
+    transform 0.15s ease,
+    border-color 0.15s ease;
 }
 
-.card:hover {
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-sm);
+/* Left rule = the slip's visual anchor; warms to oxblood on hover/focus. */
+.slip::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--rule);
+  border-radius: var(--radius-slip) 0 0 var(--radius-slip);
+  transition: background-color 0.15s ease;
+}
+
+.slip:hover {
+  transform: translateY(-2px);
+  border-color: var(--muted);
+}
+
+.slip:hover::before,
+.slip:focus-visible::before {
+  background: var(--accent);
 }
 
 .title {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: var(--text-lg);
-  line-height: 1.25;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .author {
@@ -31,7 +51,11 @@
   color: var(--color-text-muted);
 }
 
+/* Folio-style mono line-count tag. */
 .lines {
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
+  letter-spacing: 0.03em;
   color: var(--color-text-muted);
 }

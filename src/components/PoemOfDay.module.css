@@ -1,24 +1,40 @@
+/* The daily folio — a slip with a little more presence; paper, not glass. */
 .card {
+  position: relative;
   margin-top: var(--space-8);
   padding: var(--space-6);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  padding-left: calc(var(--space-6) + 2px);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-slip);
+}
+
+/* Folio anchor rule in oxblood — the daily mark. */
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  border-radius: var(--radius-slip) 0 0 var(--radius-slip);
 }
 
 .kicker {
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: var(--space-2);
 }
 
 .title {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
+  font-weight: 600;
   line-height: 1.15;
 }
 
@@ -33,12 +49,14 @@
 
 .author {
   margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-style: italic;
   color: var(--color-text-muted);
 }
 
 .preview {
   margin: var(--space-4) 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-poem);
   font-size: var(--text-lg);
   line-height: var(--leading-poem);
   color: var(--color-text);
@@ -78,17 +96,22 @@
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
   cursor: pointer;
+}
+
+.retry:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .skeletonTitle,
 .skeletonLine {
   height: 1rem;
   margin-top: var(--space-3);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-slip);
   background: linear-gradient(
     90deg,
     var(--color-skeleton) 0%,

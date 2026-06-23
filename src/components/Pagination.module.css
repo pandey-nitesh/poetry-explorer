@@ -12,14 +12,18 @@
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
   cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .btn:hover:not(:disabled) {
-  border-color: var(--color-accent);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .btn:disabled {
@@ -28,6 +32,8 @@
 }
 
 .status {
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
   color: var(--color-text-muted);
 }

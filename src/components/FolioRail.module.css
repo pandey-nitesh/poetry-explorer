@@ -1,0 +1,40 @@
+.layout {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: var(--space-6) var(--space-8);
+  align-items: start;
+}
+
+/* Quiet, mono, letter-spaced metadata; sticks alongside the reading field. */
+.rail {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.field {
+  min-width: 0;
+}
+
+/* Mobile: no side rail — a folio strip (thin left rule + labels) above the content. */
+@media (max-width: 52rem) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .rail {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    border-left: 2px solid var(--color-border);
+    padding-left: var(--space-3);
+  }
+}

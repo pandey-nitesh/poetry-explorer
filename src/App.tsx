@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
+import { RouteFocus } from './components/RouteFocus';
+import { SkipLink } from './components/SkipLink';
 import { useApplyPreferences } from './hooks/useApplyPreferences';
 import { useLists } from './hooks/useLists';
 import { Home } from './routes/Home';
@@ -28,7 +30,9 @@ function AppRoutes() {
   useApplyPreferences();
   return (
     <>
+      <SkipLink />
       <Header />
+      <RouteFocus />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<SearchResults />} />

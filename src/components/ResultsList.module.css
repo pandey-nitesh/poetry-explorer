@@ -8,6 +8,10 @@
   font-size: var(--text-sm);
 }
 
+.hint {
+  color: var(--color-accent);
+}
+
 .cards {
   list-style: none;
   margin: 0;

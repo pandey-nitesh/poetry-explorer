@@ -10,6 +10,7 @@ import styles from './ResultsList.module.css';
 
 const POEMS_PER_PAGE = 24;
 const AUTHORS_PER_PAGE = 8;
+const LARGE_RESULT_SET = 60;
 
 interface Props {
   request: SearchRequest;
@@ -52,6 +53,9 @@ export function ResultsList({ request, results, page, onPage }: Props) {
     <div className={styles.results}>
       <p className={styles.summary} aria-live="polite">
         {results.length} {results.length === 1 ? 'poem' : 'poems'} {describe(request)}
+        {results.length > LARGE_RESULT_SET && (
+          <span className={styles.hint}> — keep typing to narrow your search.</span>
+        )}
       </p>
 
       {grouped ? (

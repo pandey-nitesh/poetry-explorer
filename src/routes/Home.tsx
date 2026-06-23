@@ -4,7 +4,7 @@ import styles from './Home.module.css';
 
 export function Home() {
   return (
-    <main className={styles.home}>
+    <main id="main" tabIndex={-1} className={styles.home}>
       <header className={styles.hero}>
         <h1 className={styles.title}>Poetry Explorer</h1>
         <p className={styles.tagline}>Search and read classic public-domain poetry.</p>

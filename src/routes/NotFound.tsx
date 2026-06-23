@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export function NotFound() {
   return (
-    <main className="page">
+    <main id="main" tabIndex={-1} className="page">
       <h1>Page not found</h1>
       <p className="lede">That page doesn’t exist.</p>
       <p>

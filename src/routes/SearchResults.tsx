@@ -47,7 +47,7 @@ export function SearchResults() {
   }
 
   return (
-    <main className={styles.page} aria-busy={isLoading}>
+    <main id="main" tabIndex={-1} className={styles.page} aria-busy={isLoading}>
       <h1 className={styles.heading}>{request && !tooShort ? 'Search results' : 'Search'}</h1>
       {body}
     </main>

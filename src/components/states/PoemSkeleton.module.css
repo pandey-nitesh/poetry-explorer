@@ -1,0 +1,69 @@
+/* Mirrors PoemView.module.css: centered measure column. */
+.view {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+.head {
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  height: 2.4rem;
+  width: 70%;
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-slip);
+}
+
+.author {
+  height: 1.1rem;
+  width: 38%;
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-slip);
+}
+
+.meta {
+  height: 0.7rem;
+  width: 22%;
+  border-radius: var(--radius-slip);
+}
+
+/* Actions row + divider, matching PoemView .actions. */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.action {
+  height: 2.5rem;
+  width: 6rem;
+  border-radius: var(--radius-control);
+}
+
+/* Poem body — ragged line bars at the poem leading. */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: calc((var(--leading-poem) - 1) * 0.9rem);
+}
+
+.line {
+  height: 1rem;
+  border-radius: var(--radius-slip);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

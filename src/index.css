@@ -126,6 +126,28 @@ a {
   }
 }
 
+/* Shared shimmer for loading skeletons — colour/animation only; each bar owns its size.
+   Honors prefers-reduced-motion via the global rule above. */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton) 0%,
+    var(--color-skeleton-sheen) 50%,
+    var(--color-skeleton) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.3s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 /* Generic page shell used by route screens until richer layout lands. */
 .page {
   max-width: 64rem;

@@ -52,7 +52,7 @@ export function SearchResults() {
   } else if (tooShort) {
     body = <EmptyState title="Keep typing" message="Enter at least 2 characters to search." />;
   } else if (isLoading) {
-    body = <Skeleton rows={6} />;
+    body = <Skeleton rows={6} variant={request.kind === 'authorContains' ? 'grouped' : 'cards'} />;
   } else if (isError) {
     body = <ErrorState onRetry={refetch} />;
   } else if (results.length === 0) {

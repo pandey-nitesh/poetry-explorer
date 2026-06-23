@@ -6,6 +6,8 @@ import { ReadingMode } from './ReadingMode';
 import styles from './PoemOfDay.module.css';
 
 const PREVIEW_LINES = 6;
+// Ragged widths for the loading preview, one per previewed line.
+const SKELETON_LINE_WIDTHS = ['94%', '88%', '91%', '70%', '85%', '60%'];
 
 // The featured poem on Home — a deterministic, day-stable pick (SPEC §13). Degrades
 // quietly: a failure here never blocks the page, it just hides the feature with a retry.
@@ -15,11 +17,19 @@ export function PoemOfDay() {
 
   if (isLoading) {
     return (
-      <section className={styles.card} aria-busy="true">
+      <section className={styles.card} role="status" aria-busy="true">
         <p className={styles.kicker}>Poem of the day</p>
-        <div className={styles.skeletonTitle} />
-        <div className={styles.skeletonLine} />
-        <div className={styles.skeletonLine} />
+        <div className={`${styles.skTitle} shimmer`} aria-hidden="true" />
+        <div className={`${styles.skAuthor} shimmer`} aria-hidden="true" />
+        <div className={styles.skPreview} aria-hidden="true">
+          {SKELETON_LINE_WIDTHS.map((width, i) => (
+            <div key={i} className={`${styles.skLine} shimmer`} style={{ width }} />
+          ))}
+        </div>
+        <div className={styles.skActions} aria-hidden="true">
+          <div className={`${styles.skAction} shimmer`} />
+          <div className={`${styles.skAction} shimmer`} />
+        </div>
       </section>
     );
   }
